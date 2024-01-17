@@ -1,0 +1,9 @@
+james:
+  email: james@test.com
+  name: james
+  role: user
+
+smith:
+  email: smith@test.com
+  name: Smith
+  role: user

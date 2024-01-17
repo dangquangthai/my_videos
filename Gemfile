@@ -35,6 +35,9 @@ gem "redis", ">= 4.0.1"
 # For Queue/Background jobs
 gem 'sidekiq'
 
+# For User Authentication
+gem 'devise'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
