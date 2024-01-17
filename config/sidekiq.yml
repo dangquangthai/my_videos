@@ -1,0 +1,10 @@
+:concurrency: 20
+staging:
+  :concurrency: 50
+production:
+  :concurrency: 50
+:queues:
+  - default
+  - mailers
+  - active_storage
+  - streaming
