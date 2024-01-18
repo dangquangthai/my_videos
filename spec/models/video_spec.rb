@@ -122,4 +122,40 @@ RSpec.describe Video, type: :model do
       end.to change { video.published_at }.from(Time.zone.parse('2024-01-18 07:09:00')).to(nil)
     end
   end
+
+  describe '#new?' do
+    context 'when status is new' do
+      let(:video) { build_stubbed(:video) }
+
+      it 'returns true' do
+        expect(video.new?).to be true
+      end
+    end
+
+    context 'when status is not new' do
+      let(:video) { build_stubbed(:video, status: :failed) }
+
+      it 'returns false' do
+        expect(video.new?).to be false
+      end
+    end
+  end
+
+  describe '#failed?' do
+    context 'when status is not failed' do
+      let(:video) { build_stubbed(:video) }
+
+      it 'returns false' do
+        expect(video.failed?).to be false
+      end
+    end
+
+    context 'when status is failed' do
+      let(:video) { build_stubbed(:video, status: :failed) }
+
+      it 'returns true' do
+        expect(video.failed?).to be true
+      end
+    end
+  end
 end
