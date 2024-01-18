@@ -160,4 +160,37 @@ RSpec.describe Video, type: :model do
       end
     end
   end
+
+  describe '#likes_count' do
+    fixtures :users
+    fixtures :videos
+
+    let(:smith) { users(:smith) }
+    let(:james) { users(:james) }
+    let(:video) { videos(:published_video) }
+
+    context 'add a like' do
+      before do
+        expect(video.likes_count).to eq(0)
+      end
+
+      it 'increases the number of likes' do
+        video.likes.create(user: smith)
+        expect(video.likes_count).to eq(1)
+      end
+    end
+
+    context 'remove a like' do
+      before do
+        video.likes.create(user: smith)
+        video.likes.create(user: james)
+        expect(video.likes_count).to eq(2)
+      end
+
+      it 'decreases the number of likes' do
+        video.likes.find_by(user: smith).destroy
+        expect(video.likes_count).to eq(1)
+      end
+    end
+  end
 end
