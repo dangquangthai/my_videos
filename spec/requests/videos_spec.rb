@@ -42,28 +42,14 @@ RSpec.describe 'Videos', type: :request do
         sign_in users(:james)
       end
 
-      context 'when url is valid' do
-        it 'creates a video and returns http success' do
-          expect(Videos::NewFormComponent).not_to receive(:new)
+      it 'creates a video and returns http success' do
+        expect(Videos::NewFormComponent).not_to receive(:new)
 
-          expect do
-            post '/videos', params: { video: { video_url: 'https://www.youtube.com/watch?v=Vhh_GeBPOhs' } }, as: :turbo_stream
-          end.to change { Video.count }.by(1)
+        expect do
+          post '/videos', params: { video: { video_url: 'https://www.youtube.com/watch?v=Vhh_GeBPOhs' } }, as: :turbo_stream
+        end.to change { Video.count }.by(1)
 
-          expect(response).to have_http_status(:success)
-        end
-      end
-
-      context 'when url is invalid' do
-        it 'creates a video and returns http success' do
-          expect(Videos::NewFormComponent).to receive(:new).and_call_original
-
-          expect do
-            post '/videos', params: { video: { video_url: 'https/invalid.url' } }, as: :turbo_stream
-          end.not_to(change { Video.count })
-
-          expect(response).to have_http_status(:success)
-        end
+        expect(response).to have_http_status(:success)
       end
     end
   end

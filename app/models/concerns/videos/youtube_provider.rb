@@ -8,10 +8,13 @@ module Videos
     YOUTUBE_URL_REGEX = %r{(?:https?://)?(?:www\.)?youtu(?:\.be|be\.com)/(?:watch\?v=)?([\w-]{10,})}
 
     included do
-      validates :video_url, format: {
-        with: YOUTUBE_URL_REGEX,
-        message: 'must be a YouTube URL'
-      }
+      def from_youtube?
+        !!(video_url =~ YOUTUBE_URL_REGEX)
+      end
+
+      after_commit on: :create do
+        Videos::FetchYoutubeMetaJob.perform_later(self) if from_youtube?
+      end
     end
   end
 end

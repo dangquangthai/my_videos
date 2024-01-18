@@ -1,11 +1,46 @@
 new_video:
   video_url: https://www.youtube.com/watch?v=hInAmmQSfI4
   status: new
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
 
-new_video:
+failed_video:
+  video_url: https://www.youtube.com/watch?v=eoTpdTU8nTA
+  status: failed
+  title: This video is not available
+  description: This video is not available
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
+
+tiktok_video:
+  video_url: https://www.tiktok.com/watch?v=ibzAZyO5wmM
+  status: new
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
+
+unavailable_video:
+  video_url: https://www.youtube.com/watch?v=99999999999
+  status: new
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
+
+ready_video:
   video_url: https://www.youtube.com/watch?v=zxKPjD8urG4
   status: ready
+  video_id: zxKPjD8urG4
+  title: The Rise of the Roman Empire (Full Episode) | Drain the Oceans
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
 
-new_video:
+published_video:
   video_url: https://www.youtube.com/watch?v=2zoqNfwHIk8
-  status: published
+  status: ready
+  video_id: 2zoqNfwHIk8
+  title: Cascadia - A Place Where Giants Roam | Free Documentary Nature
+  description: "Cascadia - A Place Where Giants Roam | Wildlife DocumentaryWatch 'Blue Planet: The Fascinating World Beneath the Waves' here: https://youtu.be/CnmLgezy3jcOly..."
+  published_at: 2024-01-18 07:09:00
+  first_published_at: 2024-01-18 07:09:00
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>
+
+unpublished_video:
+  video_url: https://www.youtube.com/watch?v=lj5GXZaE7qs
+  status: ready
+  video_id: lj5GXZaE7qs
+  title: One Day in the Coldest Village on Earth −71°C (−95°F) | Yakutia, Siberia
+  first_published_at: 2024-01-18 07:09:00
+  user_id: <%= ActiveRecord::FixtureSet.identify(:james) %>

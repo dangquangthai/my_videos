@@ -2,5 +2,6 @@
 
 FactoryBot.define do
   factory :video do
+    status { 'new' }
   end
 end
