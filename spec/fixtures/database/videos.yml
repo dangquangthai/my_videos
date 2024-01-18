@@ -1,0 +1,11 @@
+new_video:
+  video_url: https://www.youtube.com/watch?v=hInAmmQSfI4
+  status: new
+
+new_video:
+  video_url: https://www.youtube.com/watch?v=zxKPjD8urG4
+  status: ready
+
+new_video:
+  video_url: https://www.youtube.com/watch?v=2zoqNfwHIk8
+  status: published

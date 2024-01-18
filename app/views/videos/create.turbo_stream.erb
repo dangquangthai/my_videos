@@ -1,0 +1,7 @@
+<% if @new_video.persisted? %>
+  <%= turbo_redirect root_path %>
+<% else %>
+  <%= turbo_stream.update 'new-video-form' do %>
+    <%= render Videos::NewFormComponent.new(video: @new_video) %>
+  <% end %>  
+<% end %>

@@ -6,7 +6,7 @@
     <% if current_user.present? %>
       <div class="flex gap-4">
         <div>
-          <%= link_to 'New video', new_user_session_path %>
+          <%= link_to 'New video', new_video_path %>
         </div>
         <div>|</div>
         <div><%= current_user.name %></div>

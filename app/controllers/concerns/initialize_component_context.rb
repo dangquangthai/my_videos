@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module InitializeComponentContextConcern
+module InitializeComponentContext
   extend ActiveSupport::Concern
 
   included do

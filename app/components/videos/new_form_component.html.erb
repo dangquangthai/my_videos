@@ -1,0 +1,18 @@
+<div id="new-video-form">
+  <%= form_for(video, as: :video, url: videos_path) do |f| %>
+    <div class="grid gap-4">
+      <div>
+        New Video
+      </div>
+      <div>
+        <%= f.text_field :video_url, required: true, autocomplete: "off", placeholder: 'Youtube URL' %>
+        <% if f.object.errors.key?(:video_url) %>
+          <div class="text-xs text-red-600 mt-1"><%= f.object.errors[:video_url].join(', ') %></div>
+        <% end %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Post", class: 'border p-2 cursor-pointer' %>
+      </div>
+    </div>
+  <% end %>
+</div>
