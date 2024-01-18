@@ -193,4 +193,38 @@ RSpec.describe Video, type: :model do
       end
     end
   end
+
+  describe '#comments_count' do
+    fixtures :users
+    fixtures :videos
+
+    let(:smith) { users(:smith) }
+    let(:james) { users(:james) }
+    let(:video) { videos(:published_video) }
+    let(:comment) { create(:comment, text: 'hello Smith', user: james, commentable: video) }
+
+    context 'add a comment' do
+      before do
+        expect(video.comments_count).to eq(0)
+      end
+
+      it 'increases the number of comments' do
+        video.comments.create(text: 'hello James', user: smith)
+        expect(video.comments_count).to eq(1)
+      end
+    end
+
+    context 'remove a comment' do
+      before do
+        video.comments.create(text: 'hello James', user: smith)
+        video.comments.create(text: 'how are you?', user: smith)
+        expect(video.comments_count).to eq(2)
+      end
+
+      it 'decreases the number of comments' do
+        video.comments.find_by(user: smith).destroy
+        expect(video.comments_count).to eq(1)
+      end
+    end
+  end
 end

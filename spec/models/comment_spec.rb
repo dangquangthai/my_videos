@@ -40,4 +40,38 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
+
+  describe '#comments_count' do
+    fixtures :users
+    fixtures :videos
+
+    let(:smith) { users(:smith) }
+    let(:james) { users(:james) }
+    let(:video) { videos(:published_video) }
+    let(:comment) { create(:comment, text: 'hello Smith', user: james, commentable: video) }
+
+    context 'add a comment' do
+      before do
+        expect(comment.comments_count).to eq(0)
+      end
+
+      it 'increases the number of comments' do
+        comment.comments.create(text: 'hello James', user: smith)
+        expect(comment.comments_count).to eq(1)
+      end
+    end
+
+    context 'remove a comment' do
+      before do
+        comment.comments.create(text: 'hello James', user: smith)
+        comment.comments.create(text: 'how are you?', user: smith)
+        expect(comment.comments_count).to eq(2)
+      end
+
+      it 'decreases the number of comments' do
+        comment.comments.find_by(text: 'hello James').destroy
+        expect(comment.comments_count).to eq(1)
+      end
+    end
+  end
 end
