@@ -1,10 +1,14 @@
 <div class="p-4 flex items-center w-100 bg-gray-200">
   <div class="grow text-lg">
-    My Videos
+    All Videos
   </div>
   <div class="flex-none">
     <% if current_user.present? %>
       <div class="flex gap-4">
+        <div>
+          <%= link_to 'My videos', videos_path %>
+        </div>
+        <div>|</div>
         <div>
           <%= link_to 'New video', new_video_path %>
         </div>

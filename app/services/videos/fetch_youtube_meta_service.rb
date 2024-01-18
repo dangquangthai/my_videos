@@ -10,11 +10,11 @@ module Videos
 
     def perform
       if video_id.blank?
-        @failed_message = 'It is not YouTube video url'
+        @failure_message = 'It is not YouTube video url'
       elsif !can_connect_to_youtube?
-        @failed_message = "Can't connect to YouTube"
+        @failure_message = "Can't connect to YouTube"
       elsif description.blank? || title.blank?
-        @failed_message = 'This video is not available'
+        @failure_message = 'This video is not available'
       end
 
       video.update(update_params)
@@ -27,8 +27,8 @@ module Videos
     def failed_update_params
       {
         status: :failed,
-        description: @failed_message,
-        title: @failed_message
+        description: @failure_message,
+        title: @failure_message
       }
     end
 
@@ -37,7 +37,7 @@ module Videos
     end
 
     def update_params
-      return failed_update_params if @failed_message.present?
+      return failed_update_params if @failure_message.present?
 
       params = {
         description: description,

@@ -3,6 +3,14 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @videos = current_user.videos.with_status(filter_status)
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def new
     @new_video = Video.new
 
@@ -20,6 +28,10 @@ class VideosController < ApplicationController
   end
 
   private
+
+  def filter_status
+    query_params[:status].presence || 'ready'
+  end
 
   def new_video_params
     params.require(:video).permit(:video_url).merge(user: current_user)

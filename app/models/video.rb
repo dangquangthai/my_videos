@@ -16,6 +16,8 @@ class Video < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
+  scope :with_status, ->(status) { where(status: status) }
+
   def new?
     status == 'new'
   end

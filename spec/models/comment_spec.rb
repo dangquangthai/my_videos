@@ -9,8 +9,7 @@ RSpec.describe Comment, type: :model do
   end
 
   describe '#likes_count' do
-    fixtures :users
-    fixtures :videos
+    fixtures :users, :videos
 
     let(:smith) { users(:smith) }
     let(:james) { users(:james) }
@@ -42,8 +41,7 @@ RSpec.describe Comment, type: :model do
   end
 
   describe '#comments_count' do
-    fixtures :users
-    fixtures :videos
+    fixtures :users, :videos
 
     let(:smith) { users(:smith) }
     let(:james) { users(:james) }

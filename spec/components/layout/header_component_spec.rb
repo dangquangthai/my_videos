@@ -16,6 +16,7 @@ RSpec.describe Layout::HeaderComponent, type: :component do
 
         expect(page).to have_text('James')
         expect(page).to have_link('New video')
+        expect(page).to have_link('My videos')
       end
 
       after do

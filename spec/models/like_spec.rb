@@ -7,8 +7,7 @@ RSpec.describe Like, type: :model do
   end
 
   describe 'validations' do
-    fixtures :users
-    fixtures :videos
+    fixtures :users, :videos
 
     describe 'uniqueness of user_id scoped to likeable_type and likeable_id' do
       subject { create(:like, user: users(:smith), likeable: videos(:published_video)) }
