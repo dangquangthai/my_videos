@@ -40,6 +40,9 @@ gem 'sidekiq'
 # For User Authentication
 gem 'devise'
 
+# components for building a view layer
+gem 'view_component'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
