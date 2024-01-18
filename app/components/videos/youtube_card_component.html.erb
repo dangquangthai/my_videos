@@ -1,22 +1,40 @@
-<div class="border rounded-md bg-gray-100 p-4">
+<div class="border rounded-md bg-gray-100 p-4" id="video-<%= video.id %>">
   <div class="flex gap-4">
-    <div class="grow">
-      <iframe 
-        width="400" 
-        height="240"
-        src="https://www.youtube-nocookie.com/embed/<%= video.video_id %>"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="flex-none" id="video-embed-<%= video.id %>">
+      <div style="background-image: url('https://i.ytimg.com/vi_webp/<%= video.video_id %>/maxresdefault.webp');"
+           data-controller="turbo--fetch"
+           data-url="<%= embed_video_path(video.id) %>"
+           class="w-[400px] h-[240px] relative flex items-center justify-center bg-cover">
+        <%== svg_icon 'youtube_button', class: 'w-16 h-16' %>
+      </div>
     </div>
-    <div>
+    <div class="grow">
       <div class="grid gap-4">
         <div class="font-bold text-base">
           <%= video.title %>
         </div>
-        <div class="text-gray-600">
+        <div class="text-gray-600 text-sm">
           <%= video.description %>
         </div>
+        <% if show_controls? %>
+          <% if video.published? %>
+            <div class="text-sm flex gap-2">
+              <span class="text-gray-600">Published: <%= time_humanize(video.first_published_at) %></span>
+              <span class="font-bold cursor-pointer"
+                    data-controller="turbo--fetch"
+                    data-url="<%= unpublish_video_path(video.id) %>"
+                    data-method="PATCH">Unpublish?</span>
+            </div>
+          <% elsif video.ready? %>
+            <div class="flex gap-2 text-sm">
+              <span class="text-gray-600">Do you want to publish this video?</span>
+              <span class="font-bold cursor-pointer"
+                    data-controller="turbo--fetch"
+                    data-url="<%= publish_video_path(video.id) %>"
+                    data-method="PATCH">Yes</span>
+            </div>
+          <% end %>
+        <% end %>
         <div class="flex gap-4">
           
         </div>

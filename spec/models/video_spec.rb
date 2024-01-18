@@ -161,6 +161,24 @@ RSpec.describe Video, type: :model do
     end
   end
 
+  describe '#ready?' do
+    context 'when status is ready' do
+      let(:video) { build_stubbed(:video, status: :ready) }
+
+      it 'returns true' do
+        expect(video.ready?).to be true
+      end
+    end
+
+    context 'when status is not ready' do
+      let(:video) { build_stubbed(:video) }
+
+      it 'returns false' do
+        expect(video.ready?).to be false
+      end
+    end
+  end
+
   describe '#likes_count' do
     fixtures :users, :videos
 

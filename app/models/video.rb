@@ -17,6 +17,7 @@ class Video < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 
   scope :with_status, ->(status) { where(status: status) }
+  scope :newest, -> { order(first_published_at: :desc) }
 
   def new?
     status == 'new'
@@ -24,5 +25,9 @@ class Video < ApplicationRecord
 
   def failed?
     status == 'failed'
+  end
+
+  def ready?
+    status == 'ready'
   end
 end

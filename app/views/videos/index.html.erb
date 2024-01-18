@@ -1,7 +1,12 @@
 <div class="grid gap-4">
+  <div class="flex gap-4">
+    <%= link_to 'New', videos_path(q: { status: 'new' }) %>
+    <%= link_to 'Ready', videos_path(q: { status: 'ready' }) %>
+    <%= link_to 'Failed', videos_path(q: { status: 'failed' }) %>
+  </div>
   <% @videos.each do |video| %>
     <% if video.from_youtube? %>
-      <%= render Videos::YoutubeCardComponent.new(video: video) %>
+      <%= render Videos::YoutubeCardComponent.new(video: video, show_controls: true) %>
     <% end %>
   <% end %>
 </div>

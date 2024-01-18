@@ -14,5 +14,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
-  resources :videos, only: [:index, :new, :create]
+  resources :videos, only: [:index, :new, :create] do
+    member do
+      patch :publish
+      patch :unpublish
+      get   :embed
+    end
+  end
 end

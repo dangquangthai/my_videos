@@ -1,7 +1,7 @@
 <div class="grid gap-4">
   <% @videos.each do |video| %>
     <% if video.from_youtube? %>
-      <%= render Videos::YoutubeCardComponent.new(video: video) %>
+      <%= render Videos::YoutubeCardComponent.new(video: video, show_controls: false) %>
     <% end %>
   <% end %>
 </div>

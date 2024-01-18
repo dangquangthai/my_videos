@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "video-#{@video.id}" do %>
+  <%= render Videos::YoutubeCardComponent.new(video: @video, show_controls: true) %>
+<% end %>

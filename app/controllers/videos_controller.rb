@@ -2,6 +2,7 @@
 
 class VideosController < ApplicationController
   before_action :authenticate_user!
+  before_action :require_video!, only: %i[publish unpublish embed]
 
   def index
     @videos = current_user.videos.with_status(filter_status)
@@ -27,7 +28,33 @@ class VideosController < ApplicationController
     end
   end
 
+  def publish
+    respond_to do |format|
+      format.turbo_stream do
+        @video.publish!
+      end
+    end
+  end
+
+  def unpublish
+    respond_to do |format|
+      format.turbo_stream do
+        @video.unpublish!
+      end
+    end
+  end
+
+  def embed
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
+
+  def require_video!
+    @video = current_user.videos.find(params[:id])
+  end
 
   def filter_status
     query_params[:status].presence || 'ready'

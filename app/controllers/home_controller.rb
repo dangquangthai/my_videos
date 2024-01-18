@@ -2,7 +2,7 @@
 
 class HomeController < ApplicationController
   def index
-    @videos = Video.published
+    @videos = Video.published.newest
 
     respond_to do |format|
       format.html

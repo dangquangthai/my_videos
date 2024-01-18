@@ -1,0 +1,3 @@
+<%= turbo_stream.update "video-embed-#{@video.id}" do %>
+  <%= render Videos::YoutubeEmbedComponent.new(video: @video) %>
+<% end %>
