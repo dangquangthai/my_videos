@@ -13,9 +13,7 @@ class Video < ApplicationRecord
   validates :status, inclusion: { in: STATUSES }
   validates :provider, inclusion: { in: PROVIDERS }, allow_nil: true
 
-  def ready?
-    status == 'ready'
-  end
+  has_many :comments, as: :commentable, dependent: :destroy
 
   def new?
     status == 'new'
